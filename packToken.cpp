@@ -83,9 +83,9 @@ bool packToken::asBool() const {
   switch (base->type) {
     case REAL:
       return static_cast<Token<double>*>(base)->val != 0;
-    case INT:
+    case INT2:
       return static_cast<Token<int64_t>*>(base)->val != 0;
-    case BOOL:
+    case BOOL2:
       return static_cast<Token<uint8_t>*>(base)->val != 0;
     case STR:
       return static_cast<Token<std::string>*>(base)->val != std::string();
@@ -106,9 +106,9 @@ double packToken::asDouble() const {
   switch (base->type) {
   case REAL:
     return static_cast<Token<double>*>(base)->val;
-  case INT:
+  case INT2:
     return static_cast<Token<int64_t>*>(base)->val;
-  case BOOL:
+  case BOOL2:
     return static_cast<Token<uint8_t>*>(base)->val;
   default:
     if (!(base->type & NUM)) {
@@ -125,9 +125,9 @@ int64_t packToken::asInt() const {
   switch (base->type) {
   case REAL:
     return static_cast<Token<double>*>(base)->val;
-  case INT:
+  case INT2:
     return static_cast<Token<int64_t>*>(base)->val;
-  case BOOL:
+  case BOOL2:
     return static_cast<Token<uint8_t>*>(base)->val;
   default:
     if (!(base->type & NUM)) {
@@ -233,10 +233,10 @@ std::string packToken::str(const TokenBase* base, uint32_t nest) {
     case REAL:
       ss << static_cast<const Token<double>*>(base)->val;
       return ss.str();
-    case INT:
+    case INT2:
       ss << static_cast<const Token<int64_t>*>(base)->val;
       return ss.str();
-    case BOOL:
+    case BOOL2:
       boolval = static_cast<const Token<uint8_t>*>(base)->val;
       return boolval ? "True" : "False";
     case STR:
